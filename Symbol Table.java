@@ -1,37 +1,54 @@
 public class SymbolTable <Key extends Comparable<Key>, Value>{
     Node root;
-    public static void main(String[] args){
-
-    }
     private class Node{
         private Node(Key k, Value v){
             Key key = k;
             Value value = v;
-            Node left = left();
-            Node right = right();
+            Node left;
+            Node right;
             int size = size();
         }
     }
-    private Node left(Node x){
+    public void put(Key k, Value v){
+        root = put(root, k, v);
+    }
+    private Node put(Node n, Key k, Value v){
+        if(n == null) return new Node(k, v);
+        int cmp = k.compareTo(n.key);
+        if(cmp > 0){
+            n.right = put(n.right, k, v);
+        }
+        else if(cmp < 0){
+            n.left = put(n.left, k, v);
+        }
+        else{
+            n.value = v;
+        }
+        return n; //why do this?
 
     }
-    private Node right(Node x){
-
+    public Value get(Key k){
+        return get(root, k);
     }
-    public void put(Value v){
-
-    }
-    private Node root(Node x, Key k){
-
-    }
-    private Node root(Node x){
-
+    private Value get(Node n, Key k){ 
+        if(n == null) return null;
+        int cmp = k.compareTo(n.key);
+        if(cmp > 0){
+            return get(n.right, k);
+        }
+        else if(cmp < 0){
+            return get(n.left, k);
+        }
+        return n.value;
     }
     public int size(Key k){
-
+        
     }
     private int size(Node x){
-        return x.size;
+        if(x ==null){
+            return 0;
+        }
+        return size(x.right) + size(x.left) + 1;
     }
     public Key select(Value v){
 
@@ -52,9 +69,9 @@ public class SymbolTable <Key extends Comparable<Key>, Value>{
     public void delete(Key k){
         root = delete(root, k);
     }
+    private Node delete(Node x, Key k){
     //t = "to delete"
     //x = "suXessor"
-    private Node delete(Node x, Key k){
         if(x == null) return null;
         int cmp = k.compareTo(x.key);
         if(cmp < 0){
@@ -74,5 +91,12 @@ public class SymbolTable <Key extends Comparable<Key>, Value>{
             x.size = size(x.left) + size(x.right) + 1;
 
         }
+    }
+    public boolean contains(Value v){}
+    public boolean isEmpty(){
+        return (root == null);
+    }
+    public static void main(String[] args){
+
     }
 }
