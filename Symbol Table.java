@@ -9,6 +9,24 @@ public class SymbolTable <Key extends Comparable<Key>, Value>{
             int size = size();
         }
     }
+    //returns array list of keys between some min and some max
+    public Iterable<Key> keys(){
+        return keys(min(),max());
+    }
+    public Iterable<Key> keys(Key min, Key max){
+        Queue<Key> q = new Queue<Key>();
+        keys(root, q, min, max);
+        return q;
+    }
+    private void keys(Node x, ArrayList<Key> q, Key lo, Key hi){
+        if(x == null) return;
+        int cmplo = lo.compareTo(x.key);
+        int comphi = hi.compareTo(x.key);
+        if(cmplo < 0) keys(x.left);
+        if(cmplo <= 0 && cmphi >= 0) q.add(x.key);
+        if(cmphi > 0) keys(x.right, q, lo, hi);
+
+    }
     public void put(Key k, Value v){
         root = put(root, k, v);
     }
@@ -92,7 +110,9 @@ public class SymbolTable <Key extends Comparable<Key>, Value>{
 
         }
     }
-    public boolean contains(Value v){}
+    public boolean contains(Value v){
+
+    }
     public boolean isEmpty(){
         return (root == null);
     }
