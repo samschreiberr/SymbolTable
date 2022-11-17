@@ -1,0 +1,95 @@
+2-3 Search Tree:
+    2-Node (one key): two links: left, right 
+    3-Node (two keys): three links: left, right, middle
+
+                       M
+                    /     \
+                   EJ      R
+                  / | \   / \
+                AC  H  L R  SX
+               /|\ /\ /\ /\ /|\
+
+To insert K:
+                        M
+                    /       \
+                   EJ        R
+                  / | \     / \
+                AC  H  LK   R  SX
+               /|\ /\  /|\   /\ /|\
+
+Insert to 3 node by itself:
+
+         AE                        AES              E
+       / | \        insert S      /||\             / \
+                                                  A   S
+
+To insert D:
+                       M
+                    /     \
+                   EJ      R
+                  / | \   / \
+                AC  H  L R  SX
+               /|\ /\ /\ /\ /|\
+
+                        M
+                    /       \
+                   EJ        R
+                  / | \     / \
+                ACD  H  LK   R  SX
+               /||\ /\  /|\   /\ /|\
+
+                        M
+                    /       \
+                   CEJ          R
+                  /| | \       / \
+                A  D  H  LK    R  SX
+               /|\   /\  /|\   /\ /|\
+
+                        EM
+                    /    |   \
+                   CJ          R
+                  /| | \       / \
+                A  D  H  LK    R  SX
+               /|\   /\  /|\   /\ /|\
+
+                        EM
+                    /    |    \
+                   C     J      R
+                  / \   / \      / \
+                A    D  H  LK    R  SX
+               /|\   /\ /\ /|\   /\ /|\
+
+Splitting the root:
+missed this one
+
+Recursive steps:
+
+Root:
+      ABC    -->       B
+     /||\            /   \
+                    A     C
+2-node parent (left):
+     D                BD 
+    / \               /|\
+  ABC       -->      A C
+ /||\               /\ /\              
+2-node parent (right):
+     D                BD 
+    / \               /|\
+      ABC   -->        A C
+     /||\              /\/\
+3-node parent(left):
+     DE                 BDE
+    / | \               /||\
+   ABC      -->        A C
+  /||\  
+3-node parent (middle):
+     AE                  ACE
+    / | \               /| |\
+     ABC      -->        B D
+    /||\  
+3-node parent (right):
+     AB                  ABD
+    / | \               /| |\
+       CDE      -->        C E
+       /||\  

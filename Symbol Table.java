@@ -120,3 +120,27 @@ public class SymbolTable <Key extends Comparable<Key>, Value>{
 
     }
 }
+//2-3 Search Tree:
+    //2-Node (one key): two links: left, right 
+    //3-Node (two keys): three links: left, right, middle
+
+//                       M
+//                    /     \
+//                   EJ      R
+//                  / | \   / \
+//                AC  H  L R  SX
+//               /|\ /\ /\ /\ /|\
+
+// To insert K:
+//                        M
+//                    /       \
+//                   EJ        R
+//                  / | \     / \
+//                AC  H  LK   R  SX
+//               /|\ /\  /|\   /\ /|\
+
+//Insert to 3 node by itself:
+//
+//         AE                        AES              E
+//       / | \        insert S      /||\             / \
+//                                                  A   S
