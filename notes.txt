@@ -9,7 +9,7 @@
                 AC  H  L R  SX
                /|\ /\ /\ /\ /|\
 
-To insert K:
+  To insert K:
                         M
                     /       \
                    EJ        R
@@ -17,13 +17,13 @@ To insert K:
                 AC  H  LK   R  SX
                /|\ /\  /|\   /\ /|\
 
-Insert to 3 node by itself:
+  Insert to 3 node by itself:
 
          AE                        AES              E
        / | \        insert S      /||\             / \
                                                   A   S
 
-To insert D:
+  To insert D:
                        M
                     /     \
                    EJ      R
@@ -59,37 +59,67 @@ To insert D:
                 A    D  H  LK    R  SX
                /|\   /\ /\ /|\   /\ /|\
 
-Splitting the root:
-missed this one
+  Splitting the root:
+    missed this one
 
-Recursive steps:
+  Recursive steps:
 
-Root:
+  Root:
       ABC    -->       B
      /||\            /   \
                     A     C
-2-node parent (left):
-     D                BD 
-    / \               /|\
-  ABC       -->      A C
- /||\               /\ /\              
-2-node parent (right):
+  2-node parent (left):
+      D                BD 
+      / \               /|\
+   ABC       -->      A C
+  /||\               /\ /\              
+  2-node parent (right):
      D                BD 
     / \               /|\
       ABC   -->        A C
      /||\              /\/\
-3-node parent(left):
-     DE                 BDE
-    / | \               /||\
-   ABC      -->        A C
-  /||\  
-3-node parent (middle):
+  3-node parent(left):
+       DE                 BDE
+      / | \               /||\
+    ABC      -->        A C
+    /||\  
+  3-node parent (middle):
      AE                  ACE
     / | \               /| |\
      ABC      -->        B D
     /||\  
-3-node parent (right):
+  3-node parent (right):
      AB                  ABD
     / | \               /| |\
        CDE      -->        C E
        /||\  
+Red-Black Search Tree:
+  All null links are black
+  Red links lean left
+  No node has 2 red links
+  Perfect balance (black height)
+
+  public static final boolean RED = true
+  public static final boolean BLACK = false
+
+  private class Node{
+    Key key;
+    Value val;
+    Node left;
+    Node right;
+    int n;
+  }
+
+  To rotate left (diagram in notes):
+    Node rotateLeft(Node h){
+      Node x = h.right;
+      h.right = x.left
+      x.left = h;
+      x.color = h.color;
+      h.color = RED;
+      x.n = h.n;
+      h.n = 1 + size(h.left) + size(h.right);
+      return x;
+    }
+
+
